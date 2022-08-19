@@ -12,15 +12,20 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
-app.get("/newJob", async (req, res) => {
-  const newJob = new AllJob({
-    title: "backend",
-    description: "backend developer in xyz",
-    location: "bangalore",
-    eligible: "experience of  5 years required",
-  });
-  await newJob.save();
-  res.send(newJob);
+app.get("/jobs", async (req, res) => {
+  //   const newJob = new AllJob({
+  //     title: "backend",
+  //     description: "backend developer in xyz",
+  //     location: "bangalore",
+  //     eligible: "btech",
+  //     experience: "5 years",
+  //     payment: "50000",
+  //     skills: "node js",
+  //   });
+  //   await newJob.save();
+  //   res.send(newJob);
+  const jobs = await AllJob.find({});
+  res.render("jobs/index", { jobs });
 });
 
 const port = process.env.PORT || 3000;

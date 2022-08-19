@@ -6,6 +6,9 @@ const AllJobSchema = new Schema({
   description: String,
   location: String,
   eligible: String,
+  experience: String,
+  payment: String,
+  skills: String,
 });
 
 module.exports = mongoose.model("AllJob", AllJobSchema);
