@@ -28,6 +28,11 @@ app.get("/jobs", async (req, res) => {
   res.render("jobs/index", { jobs });
 });
 
+app.get("/jobs/:id", async (req, res) => {
+  const job = await AllJob.findById(req.params.id);
+  res.render("jobs/show", { job });
+});
+
 const port = process.env.PORT || 3000;
 
 const start = async () => {
