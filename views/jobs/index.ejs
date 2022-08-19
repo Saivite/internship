@@ -10,6 +10,7 @@
     <h1>All Jobs</h1>
     <% for(let job of jobs){ %>
     <li><a href="/jobs/<%=job._id %>"> <%= job.title %></a></li>
+    <a class="btn" href="/jobs/<%=job._id %>/apply">Apply</a>
     <% } %>
   </body>
 </html>

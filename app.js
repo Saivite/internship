@@ -7,6 +7,7 @@ const AllJob = require("./models/allJob");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.render("home");
@@ -31,6 +32,14 @@ app.get("/jobs", async (req, res) => {
 app.get("/jobs/:id", async (req, res) => {
   const job = await AllJob.findById(req.params.id);
   res.render("jobs/show", { job });
+});
+
+app.get("/jobs/:id/apply", async (req, res) => {
+  res.render("jobs/new");
+});
+
+app.post("/jobs", (req, res) => {
+  res.send(req.body);
 });
 
 const port = process.env.PORT || 3000;
