@@ -7,16 +7,16 @@
     <title>Apply for Job</title>
   </head>
   <body>
-    <form action="/jobs/<%= job._id %>" method="POST">
+    <form action="/AllJobs" method="POST">
       <div>
-        <label for="name">Name</label>
-        <input type="text" name="job[name]" id="name" />
+        <label for="title">Title</label>
+        <input type="text" name="AllJob[title]" id="title" />
       </div>
       <div>
         <label for="location">Location</label>
-        <input type="text" name="job[location]" id="location" />
+        <input type="text" name="AllJob[location]" id="location" />
       </div>
-      <div>
+      <!-- <div>
         <label for="dob">Date Of Birth</label>
         <input type="date" name="job[dob]" id="dob" />
       </div>
@@ -40,8 +40,9 @@
       <div>
         <label for="empId">Employee ID</label>
         <input type="text" name="job[empId]" id="empId" />
-      </div>
+      </div> -->
       <button>Submit</button>
     </form>
+    <a href="/AllJobs">Back To All Jobs</a>
   </body>
 </html>

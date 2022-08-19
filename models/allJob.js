@@ -9,6 +9,7 @@ const AllJobSchema = new Schema({
   experience: String,
   payment: String,
   skills: String,
+  hasApplied: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model("AllJob", AllJobSchema);

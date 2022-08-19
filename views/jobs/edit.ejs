@@ -4,21 +4,27 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewp ort" content="width=device-width, initial-scale=1.0" />
-    <title>Apply for Job</title>
+    <title>Edit Your Form</title>
   </head>
   <body>
-    <form action="/jobs/<%= job._id %>" method="POST">
+    <h1>Edit Your Job</h1>
+    <form action="/jobs/<%= job._id %>?_method=PUT" method="POST">
       <div>
         <label for="name">Name</label>
-        <input type="text" name="job[name]" id="name" />
+        <input type="text" name="job[name]" id="name" value="<%= job.name%>" />
       </div>
       <div>
         <label for="location">Location</label>
-        <input type="text" name="job[location]" id="location" />
+        <input
+          type="text"
+          name="job[location]"
+          value="<%= job.location %>"
+          id="location"
+        />
       </div>
       <div>
         <label for="dob">Date Of Birth</label>
-        <input type="date" name="job[dob]" id="dob" />
+        <input type="date" name="job[dob]" id="dob" value="<%= job.dob %>" />
       </div>
       <div>
         <label for="gender">Gender:</label>
@@ -31,17 +37,33 @@
       </div>
       <div>
         <label for="email">Email</label>
-        <input type="email" name="job[email]" id="email" />
+        <input
+          type="email"
+          name="job[email]"
+          id="email"
+          value="<%= job.email %>"
+        />
       </div>
       <div>
         <label for="mobile">Mobile Number</label>
-        <input type="text" name="job[mobile]" id="mobile" />
+        <input
+          type="text"
+          name="job[mobile]"
+          id="mobile"
+          value="<%= job.mobile %>"
+        />
       </div>
       <div>
         <label for="empId">Employee ID</label>
-        <input type="text" name="job[empId]" id="empId" />
+        <input
+          type="text"
+          name="job[empId]"
+          id="empId"
+          value="<%= job.empId %>"
+        />
       </div>
       <button>Submit</button>
     </form>
+    <a href="/jobs/<%=job._id %>"></a>
   </body>
 </html>

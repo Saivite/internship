@@ -7,6 +7,7 @@
     <title>Show</title>
   </head>
   <body>
+    <h1>ADMIN SHOW PAGE</h1>
     <h1><%= job.title %></h1>
     <h2><%= job.location %></h2>
     <% if(job.hasApplied) {%>
@@ -16,8 +17,17 @@
       <a class="btn" href="/jobs/<%=job._id %>/apply">Apply</a>
     </p>
     <% }%>
-
+    <p>
+      <a href="/AllJobs/<%=job._id %>/edit">Edit Job</a>
+    </p>
     <ul></ul>
+    <!-- DELETE BUTTON HERE -->
+    <p>
+        <form action="/AllJobs/<%=job._id%>?_method=DELETE" method="POST">
+            <button>DELETE</button>
+        </form>
+    </p>
+
     <footer>
       <a href="/jobs">All Jobs</a>
     </footer>
