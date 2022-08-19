@@ -6,7 +6,10 @@ const connectDB = require("./db/connect");
 const AllJob = require("./models/allJob");
 const Job = require("./models/job");
 const methodOverride = require("method-override");
+//engine that is used to run, parse and make sense of ejs
+const ejsMate = require("ejs-mate");
 
+app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
@@ -67,33 +70,33 @@ app.put("/jobs/:id", async (req, res) => {
 
 app.get("/AllJobs", async (req, res) => {
   const jobs = await AllJob.find({});
-  res.render("jobs/admin_index", { jobs });
+  res.render("admin-jobs/admin_index", { jobs });
 });
 
 app.get("/AllJobs/new", async (req, res) => {
-  res.render("jobs/admin_new");
+  res.render("admin-jobs/admin_new");
 });
 
 app.post("/AllJobs", async (req, res) => {
   const job = new AllJob(req.body.AllJob);
   await job.save();
-  res.redirect(`/jobs/${job._id}`);
+  res.redirect(`AllJobs/${job._id}`);
 });
 
 app.get("/AllJobs/:id", async (req, res) => {
   const job = await AllJob.findById(req.params.id);
-  res.render("jobs/admin_show", { job });
+  res.render("admin-jobs/admin_show", { job });
 });
 
 app.get("/AllJobs/:id/edit", async (req, res) => {
   const job = await AllJob.findById(req.params.id);
-  res.render("jobs/admin_edit", { job });
+  res.render("admin-jobs/admin_edit", { job });
 });
 
 app.put("/AllJobs/:id", async (req, res) => {
   const { id } = req.params;
   const job = await AllJob.findByIdAndUpdate(id, { ...req.body.AllJob });
-  res.redirect(`/jobs/${job._id}`);
+  res.redirect(`/AllJobs/${job._id}`);
 });
 
 app.delete("/AllJobs/:id", async (req, res) => {

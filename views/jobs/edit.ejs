@@ -1,69 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewp ort" content="width=device-width, initial-scale=1.0" />
-    <title>Edit Your Form</title>
-  </head>
-  <body>
-    <h1>Edit Your Job</h1>
-    <form action="/jobs/<%= job._id %>?_method=PUT" method="POST">
-      <div>
-        <label for="name">Name</label>
-        <input type="text" name="job[name]" id="name" value="<%= job.name%>" />
-      </div>
-      <div>
-        <label for="location">Location</label>
-        <input
-          type="text"
-          name="job[location]"
-          value="<%= job.location %>"
-          id="location"
-        />
-      </div>
-      <div>
-        <label for="dob">Date Of Birth</label>
-        <input type="date" name="job[dob]" id="dob" value="<%= job.dob %>" />
-      </div>
-      <div>
-        <label for="gender">Gender:</label>
+<% layout('layouts/boilerplate')%>
+<h1>Edit Your Job</h1>
+<form action="/jobs/<%= job._id %>?_method=PUT" method="POST">
+  <div class="col-md-6">
+    <label for="email" class="form-label">Email</label>
+    <input
+      type="email"
+      class="form-control"
+      name="job[email]"
+      id="email"
+      value="<%=job.email%>"
+    />
+  </div>
+  <div class="col-md-6">
+    <label for="name" class="form-label">Name</label>
+    <input
+      type="text"
+      name="job[name]"
+      class="form-control"
+      id="name"
+      value="<%=job.name%>"
+    />
+  </div>
+  <div class="col-12">
+    <label for="address" class="form-label">Address</label>
+    <input
+      type="text"
+      class="form-control"
+      id="address"
+      placeholder="1234 Main St"
+      name="job[address]"
+      value="<%=job.address %>"
+    />
+  </div>
 
-        <select name="job[gender]" id="gender">
-          <optgroup label="Gender"></optgroup>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-      </div>
-      <div>
-        <label for="email">Email</label>
-        <input
-          type="email"
-          name="job[email]"
-          id="email"
-          value="<%= job.email %>"
-        />
-      </div>
-      <div>
-        <label for="mobile">Mobile Number</label>
-        <input
-          type="text"
-          name="job[mobile]"
-          id="mobile"
-          value="<%= job.mobile %>"
-        />
-      </div>
-      <div>
-        <label for="empId">Employee ID</label>
-        <input
-          type="text"
-          name="job[empId]"
-          id="empId"
-          value="<%= job.empId %>"
-        />
-      </div>
-      <button>Submit</button>
-    </form>
-    <a href="/jobs/<%=job._id %>"></a>
-  </body>
-</html>
+  <div class="col-md-6">
+    <label for="currentPosition" class="form-label">Current Position</label>
+    <input
+      type="text"
+      class="form-control"
+      id="currentPosition"
+      name="job[currentPosition]"
+      value="<%=job.currentPosition %>"
+    />
+  </div>
+  <div class="col-md-4">
+    <label for="location" class="form-label">Preferred Location</label>
+    <select id="location" class="form-select">
+      <option selected>Choose...</option>
+      <option value="KOL">Kolkata</option>
+      <option value="JAM">Jamshedpur</option>
+      <option value="CHE">Chennai</option>
+      <option value="BAN">Bangalore</option>
+      <option value="HYD">Hyderabad</option>
+      <option value="DEL">Delhi</option>
+    </select>
+  </div>
+
+  <div class="col-md-2">
+    <label for="gender" class="form-label">Gender</label>
+    <select id="gender" class="form-select">
+      <option selected>Choose...</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+  </div>
+
+  <div class="col-md-4">
+    <label for="mobile" class="form-label">Mobile Number</label>
+    <input
+      type="number"
+      class="form-control"
+      id="number"
+      name="job[number]"
+      value="<%=job.number% %>"
+    />
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+  <a href="/jobs/<%=job._id %>">Back to Job</a>
+</form>

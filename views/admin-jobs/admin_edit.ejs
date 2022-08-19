@@ -1,0 +1,84 @@
+<% layout('./layouts/boilerplate')%>
+
+<div class="row">
+  <h1 class="text-center">Edit Job</h1>
+  <div class="col-6 offset-3">
+    <form action="/AllJobs/<%=job._id %>?_method=PUT" method="POST">
+      <div class="mb-3">
+        <label class="form-label" for="title">Title</label>
+        <input
+          class="form-control"
+          type="text"
+          name="AllJob[title]"
+          id="title"
+          value="<%= job.title %>"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="location">Location</label>
+        <input
+          class="form-control"
+          type="text"
+          name="AllJob[location]"
+          id="location"
+          value="<%= job.location %>"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="description">Description</label>
+        <textarea
+          class="form-control"
+          type="text"
+          id="description"
+          name="AllJob[description]">
+          <%= job.description %>
+        </textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="price">Payment</label>
+        <div class="input-group">
+            <span class="input-group-text" id="payment-label">Rs</span>
+            <input type="text" class="form-control" id="payment" placeholder="0.00" aria-label="payment"
+                aria-describedby="payment-label" name="AllJob[payment]" value="<%=job.payment%>">
+        </div>
+    </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="skills">Skills Required</label>
+        <input
+          class="form-control"
+          type="text"
+          name="AllJob[skills]"
+          id="skills"
+          value="<%= job.skills %>"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="experience">Experience Required</label>
+        <input
+          class="form-control"
+          type="text"
+          name="AllJob[experience]"
+          id="experience"
+          value="<%= job.experience %>"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="eligible">Eligibllity Required</label>
+        <input
+          class="form-control"
+          type="text"
+          name="AllJob[eligible]"
+          id="eligible"
+          value="<%= job.eligible %>"
+        />
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-info">Update Job</button>
+    </form>
+  </div>
+<a href="/AllJobs">Back To All Jobs</a>
+</div>

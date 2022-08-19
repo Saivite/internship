@@ -1,16 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jobs</title>
-  </head>
-  <body>
-    <h1>All Jobs</h1>
-    <% for(let job of jobs){ %>
-    <li><a href="/jobs/<%=job._id %>"> <%= job.title %></a></li>
-    <!-- <a class="btn" href="/jobs/<%=job._id %>/apply">Apply</a> -->
-    <% } %>
-  </body>
-</html>
+<% layout('./layouts/boilerplate')%>
+<div class="col-10 offset-1">
+  <h1>All Jobs</h1>
+  <% for(let job of jobs){ %>
+
+  <div class="card mb-4">
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><%= job.title %></h5>
+        <p class="card-text"><%= job.description %></p>
+        <p class="card-text"><%= job.skills %></p>
+        <p class="card-text">
+          <small class="text-muted"><%= job.location%></small>
+        </p>
+        <p class="card-text">
+          <small class="text-muted"><%= job.eligible%></small>
+        </p>
+        <p class="card-text">
+          <small class="text-muted"><%= job.experience%></small>
+        </p>
+        <a href="/jobs/<%=job._id%>" class="btn btn-primary">More Info</a>
+      </div>
+    </div>
+  </div>
+  <!-- <li><a href="/jobs/<%=job._id %>"> <%= job.title %></a></li> -->
+  <!-- <a class="btn" href="/jobs/<%=job._id %>/apply">Apply</a> -->
+  <% } %>
+</div>

@@ -1,0 +1,104 @@
+<% layout('./layouts/boilerplate')%>
+<div class="row">
+  <h1 class="text-center">Add New Job</h1>
+  <div class="col-6 offset-3">
+    <form action="/AllJobs" method="POST">
+      <div class="mb-3">
+        <label class="form-label" for="title">Title</label>
+        <input
+          class="form-control"
+          type="text"
+          name="AllJob[title]"
+          id="title"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="location">Location</label>
+        <input
+          class="form-control"
+          type="text"
+          name="AllJob[location]"
+          id="location"
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="description">Description</label>
+        <textarea
+          class="form-control"
+          type="text"
+          id="description"
+          name="AllJob[description]"
+        ></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="price">Payment</label>
+        <div class="input-group">
+            <span class="input-group-text" id="payment-label">$</span>
+            <input type="text" class="form-control" id="payment" placeholder="0.00" aria-label="payment"
+                aria-describedby="payment-label" name="job[payment]">
+        </div>
+    </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="skills">Skills Required</label>
+        <input
+          class="form-control"
+          type="text"
+          name="AllJob[skills]"
+          id="skills"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="experience">Experience Required</label>
+        <input
+          class="form-control"
+          type="text"
+          name="AllJob[experience]"
+          id="experience"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="eligible">Eligibllity Required</label>
+        <input
+          class="form-control"
+          type="text"
+          name="AllJob[eligible]"
+          id="eligible"
+        />
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-success">Add Job</button>
+    </form>
+  </div>
+<a href="/AllJobs">Back To All Jobs</a>
+</div>
+
+<!-- <div>
+        <label for="dob">Date Of Birth</label>
+        <input type="date" name="job[dob]" id="dob" />
+      </div>
+      <div>
+        <label for="gender">Gender:</label>
+
+        <select name="job[gender]" id="gender">
+          <optgroup label="Gender"></optgroup>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" name="job[email]" id="email" />
+      </div>
+      <div>
+        <label for="mobile">Mobile Number</label>
+        <input type="text" name="job[mobile]" id="mobile" />
+      </div>
+      <div>
+        <label for="empId">Employee ID</label>
+        <input type="text" name="job[empId]" id="empId" />
+      </div> -->
+
