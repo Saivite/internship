@@ -15,16 +15,15 @@
         <li class="list-group-item">Experience: <%= job.experience %> Years</li>
       </ul>
       <div class="card-body">
-        <a class="card-link btn btn-primary" href="/jobs/<%=job._id %>/apply%>"
-          >Apply</a
-        >
-        <a href="/jobs" class="card-link btn btn-info">All Jobs</a>
-        <a class="card-link btn btn-warning" href="/AllJobs/<%=job._id %>/edit"
+        <a href="/admin/AllJobs" class="card-link btn btn-info">All Jobs</a>
+        <a
+          class="card-link btn btn-warning"
+          href="/admin/AllJobs/<%=job._id %>/edit"
           >Edit</a
         >
         <form
           class="d-inline"
-          action="/AllJobs/<%=job._id%>?_method=DELETE"
+          action="/admin/AllJobs/<%=job._id%>?_method=DELETE"
           method="POST"
         >
           <button class="btn btn-danger me-md-2">DELETE</button>

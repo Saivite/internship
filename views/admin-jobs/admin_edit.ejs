@@ -3,7 +3,7 @@
 <div class="row">
   <h1 class="text-center">Edit Job</h1>
   <div class="col-6 offset-3">
-    <form action="/AllJobs/<%=job._id %>?_method=PUT" method="POST">
+    <form action="/admin/AllJobs/<%=job._id %>?_method=PUT" method="POST" novalidate class="validated-form"> 
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
         <input
@@ -12,6 +12,7 @@
           name="AllJob[title]"
           id="title"
           value="<%= job.title %>"
+          required
         />
       </div>
       <div class="mb-3">
@@ -22,6 +23,7 @@
           name="AllJob[location]"
           id="location"
           value="<%= job.location %>"
+          required
         />
       </div>
       <div class="mb-3">
@@ -30,7 +32,8 @@
           class="form-control"
           type="text"
           id="description"
-          name="AllJob[description]">
+          name="AllJob[description]"
+          required>
           <%= job.description %>
         </textarea>
       </div>
@@ -40,7 +43,7 @@
         <div class="input-group">
             <span class="input-group-text" id="payment-label">Rs</span>
             <input type="text" class="form-control" id="payment" placeholder="0.00" aria-label="payment"
-                aria-describedby="payment-label" name="AllJob[payment]" value="<%=job.payment%>">
+                aria-describedby="payment-label" name="AllJob[payment]" value="<%=job.payment%>" required>
         </div>
     </div>
 
@@ -52,6 +55,7 @@
           name="AllJob[skills]"
           id="skills"
           value="<%= job.skills %>"
+          required
         />
       </div>
 
@@ -63,6 +67,7 @@
           name="AllJob[experience]"
           id="experience"
           value="<%= job.experience %>"
+          required
         />
       </div>
 
@@ -74,11 +79,12 @@
           name="AllJob[eligible]"
           id="eligible"
           value="<%= job.eligible %>"
+          required
         />
       </div>
       <div class="mb-3">
         <button class="btn btn-info">Update Job</button>
     </form>
   </div>
-<a href="/AllJobs">Back To All Jobs</a>
+<a href="/admin/AllJobs">Back To All Jobs</a>
 </div>

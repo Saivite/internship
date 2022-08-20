@@ -2,7 +2,7 @@
 <div class="row">
   <h1 class="text-center">Add New Job</h1>
   <div class="col-6 offset-3">
-    <form action="/AllJobs" method="POST">
+    <form action="/admin/AllJobs/" method="POST" novalidate class="validated-form">
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
         <input
@@ -10,6 +10,7 @@
           type="text"
           name="AllJob[title]"
           id="title"
+          required
         />
       </div>
       <div class="mb-3">
@@ -19,6 +20,7 @@
           type="text"
           name="AllJob[location]"
           id="location"
+          required
         />
       </div>
       <div class="mb-3">
@@ -28,6 +30,7 @@
           type="text"
           id="description"
           name="AllJob[description]"
+          required
         ></textarea>
       </div>
 
@@ -36,7 +39,7 @@
         <div class="input-group">
             <span class="input-group-text" id="payment-label">$</span>
             <input type="text" class="form-control" id="payment" placeholder="0.00" aria-label="payment"
-                aria-describedby="payment-label" name="job[payment]">
+                aria-describedby="payment-label" name="AllJob[payment]" required>
         </div>
     </div>
 
@@ -47,6 +50,7 @@
           type="text"
           name="AllJob[skills]"
           id="skills"
+          required
         />
       </div>
 
@@ -57,6 +61,7 @@
           type="text"
           name="AllJob[experience]"
           id="experience"
+          required
         />
       </div>
 
@@ -67,6 +72,7 @@
           type="text"
           name="AllJob[eligible]"
           id="eligible"
+          required
         />
       </div>
       <div class="mb-3">

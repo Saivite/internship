@@ -3,14 +3,32 @@
 <div class="row">
   <h1 class="text-center">Apply for Job</h1>
   <div class="col-6 offset-3">
-    <form action="/jobs/<%= job._id %>" method="POST" class="row g-3">
+    <form
+      action="/jobs/<%= job._id %>"
+      method="POST"
+      class="row g-3"
+      novalidate
+      class="validated-form"
+    >
       <div class="col-md-6">
         <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" name="job[email]" id="email" />
+        <input
+          type="email"
+          class="form-control"
+          name="job[email]"
+          id="email"
+          required
+        />
       </div>
       <div class="col-md-6">
         <label for="name" class="form-label">Name</label>
-        <input type="text" name="job[name]" class="form-control" id="name" />
+        <input
+          type="text"
+          name="job[name]"
+          class="form-control"
+          id="name"
+          required
+        />
       </div>
       <div class="col-12">
         <label for="address" class="form-label">Address</label>
@@ -20,6 +38,7 @@
           id="address"
           placeholder="1234 Main St"
           name="job[address]"
+          required
         />
       </div>
 
@@ -30,11 +49,12 @@
           class="form-control"
           id="currentPosition"
           name="job[currentPosition]"
+          required
         />
       </div>
       <div class="col-md-4">
         <label for="location" class="form-label">Preferred Location</label>
-        <select id="location" class="form-select">
+        <select id="location" class="form-select" required>
           <option selected>Choose...</option>
           <option>Kolkata</option>
           <option>Jamshedpur</option>
@@ -47,7 +67,7 @@
 
       <div class="col-md-2">
         <label for="gender" class="form-label">Gender</label>
-        <select id="gender" class="form-select">
+        <select id="gender" class="form-select" required>
           <option selected>Choose...</option>
           <option>Male</option>
           <option>Female</option>
@@ -61,6 +81,7 @@
           class="form-control"
           id="number"
           name="job[number]"
+          required
         />
       </div>
       <div class="col-12">
