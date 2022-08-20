@@ -4,11 +4,11 @@
   <div class="col-6 offset-3">
     <form action="/admin/AllJobs/" method="POST" novalidate class="validated-form">
       <div class="mb-3">
-        <label class="form-label" for="title">Title</label>
+        <label class="form-label" for="title">Position</label>
         <input
           class="form-control"
           type="text"
-          name="AllJob[title]"
+          name="AllJob[position]"
           id="title"
           required
         />
@@ -23,21 +23,12 @@
           required
         />
       </div>
-      <div class="mb-3">
-        <label class="form-label" for="description">Description</label>
-        <textarea
-          class="form-control"
-          type="text"
-          id="description"
-          name="AllJob[description]"
-          required
-        ></textarea>
-      </div>
+
 
       <div class="mb-3">
         <label class="form-label" for="price">Payment</label>
         <div class="input-group">
-            <span class="input-group-text" id="payment-label">$</span>
+            <span class="input-group-text" id="payment-label">Rs</span>
             <input type="text" class="form-control" id="payment" placeholder="0.00" aria-label="payment"
                 aria-describedby="payment-label" name="AllJob[payment]" required>
         </div>
@@ -66,45 +57,76 @@
       </div>
 
       <div class="mb-3">
-        <label class="form-label" for="eligible">Eligibllity Required</label>
+        <label class="form-label" for="eligibility">Eligibllity Required</label>
         <input
           class="form-control"
           type="text"
-          name="AllJob[eligible]"
-          id="eligible"
+          name="AllJob[eligibility]"
+          id="eligibility"
           required
         />
       </div>
+
+
+      <div class="mb-3">
+        <label class="form-label" for="businessHR">Business HR</label>
+        <input
+          class="form-control"
+          type="text"
+          name="AllJob[businessHR]"
+          id="businessHR"
+          required
+        />
+      </div>
+
+
+
+
+              <div class="mb-3">
+                  <label for="openingDate" class="form-label">Opening Date</label>
+                      <div class="input-group date" id="datepicker1">
+                          <input type="text" name="AllJob[openingDate]" class="form-control">
+                          <span class="input-group-append">
+                              <span class="input-group-text bg-white d-block">
+                                  <i class="fa fa-calendar"></i>
+                              </span>
+                          </span>
+                      </div>
+              </div>
+
+
+
+              <div class="mb-3">
+                <label for="openingDate" class="form-label">Closing Date</label>
+                    <div class="input-group date" id="datepicker2">
+                        <input type="text" class="form-control" name="AllJob[closingDate]">
+                        <span class="input-group-append">
+                            <span class="input-group-text bg-white d-block">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </span>
+                    </div>
+            </div>
+
+
+
+            <div class="mb-3">
+              <label class="form-label" for="description">Description</label>
+              <textarea
+                class="form-control"
+                type="text"
+                id="description"
+                name="AllJob[description]"
+                required
+              ></textarea>
+            </div>
+
       <div class="mb-3">
         <button class="btn btn-success">Add Job</button>
     </form>
   </div>
-<a href="/AllJobs">Back To All Jobs</a>
+<a href="/admin/AllJobs">Back To All Jobs</a>
 </div>
 
-<!-- <div>
-        <label for="dob">Date Of Birth</label>
-        <input type="date" name="job[dob]" id="dob" />
-      </div>
-      <div>
-        <label for="gender">Gender:</label>
 
-        <select name="job[gender]" id="gender">
-          <optgroup label="Gender"></optgroup>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-      </div>
-      <div>
-        <label for="email">Email</label>
-        <input type="email" name="job[email]" id="email" />
-      </div>
-      <div>
-        <label for="mobile">Mobile Number</label>
-        <input type="text" name="job[mobile]" id="mobile" />
-      </div>
-      <div>
-        <label for="empId">Employee ID</label>
-        <input type="text" name="job[empId]" id="empId" />
-      </div> -->
 

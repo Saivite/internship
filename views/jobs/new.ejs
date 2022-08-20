@@ -1,21 +1,20 @@
 <% layout('./layouts/boilerplate')%>
 
 <div class="row">
-  <h1 class="text-center">Apply for Job</h1>
+  <h1 class="text-center">Apply for <%=job.position %></h1>
   <div class="col-6 offset-3">
     <form
       action="/jobs/<%= job._id %>"
       method="POST"
-      class="row g-3"
+      class="row g-3 mb-5 validated-form"
       novalidate
-      class="validated-form"
     >
       <div class="col-md-6">
         <label for="email" class="form-label">Email</label>
         <input
           type="email"
           class="form-control"
-          name="job[email]"
+          name="jobData[email]"
           id="email"
           required
         />
@@ -24,7 +23,7 @@
         <label for="name" class="form-label">Name</label>
         <input
           type="text"
-          name="job[name]"
+          name="jobData[name]"
           class="form-control"
           id="name"
           required
@@ -37,7 +36,7 @@
           class="form-control"
           id="address"
           placeholder="1234 Main St"
-          name="job[address]"
+          name="jobData[address]"
           required
         />
       </div>
@@ -48,13 +47,18 @@
           type="text"
           class="form-control"
           id="currentPosition"
-          name="job[currentPosition]"
+          name="jobData[currentPosition]"
           required
         />
       </div>
       <div class="col-md-4">
         <label for="location" class="form-label">Preferred Location</label>
-        <select id="location" class="form-select" required>
+        <select
+          id="location"
+          name="jobData[location]"
+          class="form-select"
+          required
+        >
           <option selected>Choose...</option>
           <option>Kolkata</option>
           <option>Jamshedpur</option>
@@ -67,7 +71,7 @@
 
       <div class="col-md-2">
         <label for="gender" class="form-label">Gender</label>
-        <select id="gender" class="form-select" required>
+        <select id="gender" name="jobData[gender]" class="form-select" required>
           <option selected>Choose...</option>
           <option>Male</option>
           <option>Female</option>
@@ -80,7 +84,7 @@
           type="number"
           class="form-control"
           id="number"
-          name="job[number]"
+          name="jobData[mobile]"
           required
         />
       </div>

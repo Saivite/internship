@@ -6,9 +6,9 @@ const connectDB = require("./db/connect");
 const catchAsync = require("./utils/catchAsync");
 const ExpressError = require("./utils/ExpressError");
 const AllJob = require("./models/allJob");
-const Job = require("./models/job");
+const JobData = require("./models/jobData");
 // const Joi = require("joi");
-const { allJobSchema } = require("./schema");
+const { allJobSchema, jobDataSchema } = require("./schema");
 const methodOverride = require("method-override");
 //engine that is used to run, parse and make sense of ejs
 const ejsMate = require("ejs-mate");
@@ -25,6 +25,16 @@ const validateAllJob = (req, res, next) => {
   //this is not mongoose schema
 
   const { error } = allJobSchema.validate(req.body);
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+};
+
+const validateJobData = (req, res, next) => {
+  const { error } = jobDataSchema.validate(req.body);
   if (error) {
     const msg = error.details.map((el) => el.message).join(",");
     throw new ExpressError(msg, 400);
@@ -59,7 +69,8 @@ app.get(
 app.get(
   "/jobs/:id",
   catchAsync(async (req, res) => {
-    const job = await AllJob.findById(req.params.id);
+    const job = await AllJob.findById(req.params.id).populate("jobsData");
+    console.log(job);
     res.render("jobs/show", { job });
   })
 );
@@ -73,32 +84,34 @@ app.get(
 );
 
 app.post(
-  "/jobs/:id",
+  "/jobs/:id/",
+  validateJobData,
   catchAsync(async (req, res) => {
     const { id } = req.params;
-    const job = new Job(req.body.job);
+    const job = await AllJob.findById(id);
+    const jobData = new JobData(req.body.jobData);
+    console.log(req.body.jobData);
+    job.jobsData.push(jobData);
+    await jobData.save();
     await job.save();
-    const job_applied = await AllJob.findByIdAndUpdate(id, {
-      hasApplied: true,
-    });
-    res.redirect(`/jobs/${id}`);
+    res.redirect(`/jobs/${job._id}`);
   })
 );
 
-app.get(
-  "/jobs/:id/edit",
-  catchAsync(async (req, res) => {
-    const job = await Job.findById(req.params.id);
-    res.render("jobs/edit", { job });
-  })
-);
+// app.get(
+//   "/jobs/:id/edit",
+//   catchAsync(async (req, res) => {
+//     const job = await JobData.findById(req.params.id);
+//     res.render("jobs/edit", { job });
+//   })
+// );
 
-app.put(
-  "/jobs/:id",
-  catchAsync(async (req, res) => {
-    res.send("Update worked");
-  })
-);
+// app.put(
+//   "/jobs/:id",
+//   catchAsync(async (req, res) => {
+//     res.send("Update worked");
+//   })
+// );
 
 //******************* ADMIN PART ************** */
 
@@ -132,7 +145,7 @@ app.post(
 app.get(
   "/admin/AllJobs/:id",
   catchAsync(async (req, res) => {
-    const job = await AllJob.findById(req.params.id);
+    const job = await AllJob.findById(req.params.id).populate("jobsData");
     res.render("admin-jobs/admin_show", { job });
   })
 );
@@ -164,9 +177,16 @@ app.delete(
   })
 );
 
-// app.all("*", (req, res, next) => {
-//   next(new ExpressError("Page Not Found", 404));
-// });
+app.get("/admin/AllJobs/:id/jobInfo", async (req, res) => {
+  const { id } = req.params;
+  const job = await AllJob.findById(id).populate("jobsData");
+
+  res.render("admin-jobs/admin_list", { job });
+});
+
+app.all("*", (req, res, next) => {
+  next(new ExpressError("Page Not Found", 404));
+});
 
 app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;

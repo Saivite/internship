@@ -5,13 +5,13 @@
   <div class="col-6 offset-3">
     <form action="/admin/AllJobs/<%=job._id %>?_method=PUT" method="POST" novalidate class="validated-form"> 
       <div class="mb-3">
-        <label class="form-label" for="title">Title</label>
+        <label class="form-label" for="position">Position</label>
         <input
           class="form-control"
           type="text"
-          name="AllJob[title]"
+          name="AllJob[position]"
           id="title"
-          value="<%= job.title %>"
+          value="<%= job.position %>"
           required
         />
       </div>
@@ -25,17 +25,6 @@
           value="<%= job.location %>"
           required
         />
-      </div>
-      <div class="mb-3">
-        <label class="form-label" for="description">Description</label>
-        <textarea
-          class="form-control"
-          type="text"
-          id="description"
-          name="AllJob[description]"
-          required>
-          <%= job.description %>
-        </textarea>
       </div>
 
       <div class="mb-3">
@@ -72,16 +61,82 @@
       </div>
 
       <div class="mb-3">
-        <label class="form-label" for="eligible">Eligibllity Required</label>
+        <label class="form-label" for="eligiblity">Eligibllity Required</label>
         <input
           class="form-control"
           type="text"
-          name="AllJob[eligible]"
+          name="AllJob[eligiblity]"
           id="eligible"
-          value="<%= job.eligible %>"
+          value="<%= job.eligibility %>"
           required
         />
       </div>
+
+
+
+
+      <div class="mb-3">
+        <label class="form-label" for="businessHR">Business HR</label>
+        <input
+          class="form-control"
+          type="text"
+          name="AllJob[businessHR]"
+          id="businessHR"
+          value="<%= job.businessHR %>"
+          required
+        />
+      </div>
+
+
+
+
+
+
+
+      <div class="mb-3">
+        <label for="openingDate" class="form-label">Opening Date</label>
+            <div class="input-group date" id="datepicker1">
+                <input type="text" name="AllJob[openingDate]" class="form-control" value="<%= job.openingDate %>">
+                <span class="input-group-append">
+                    <span class="input-group-text bg-white d-block">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                </span>
+            </div>
+    </div>
+
+
+
+    <div class="mb-3">
+      <label for="openingDate" class="form-label">Closing Date</label>
+          <div class="input-group date" id="datepicker2">
+              <input type="text" class="form-control" name="AllJob[closingDate]" value="<%= job.closingDate %>">
+              <span class="input-group-append">
+                  <span class="input-group-text bg-white d-block">
+                      <i class="fa fa-calendar"></i>
+                  </span>
+              </span>
+          </div>
+  </div>
+
+
+
+
+  <div class="mb-3">
+    <label class="form-label" for="description">Description</label>
+    <textarea
+      class="form-control"
+      type="text"
+      id="description"
+      name="AllJob[description]"
+      required>
+      <%= job.description %>
+    </textarea>
+  </div>
+
+
+
+
       <div class="mb-3">
         <button class="btn btn-info">Update Job</button>
     </form>

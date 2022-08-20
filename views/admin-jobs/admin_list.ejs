@@ -1,0 +1,29 @@
+<% layout('./layouts/boilerplate')%>
+<h2>
+  List Of Employees Aplied For
+  <span class="badge bg-secondary mb-3"><%=job.position %></span>
+</h2>
+<!-- <ul>
+  <%job.jobsData.forEach((data) => {%>
+  <a href="#"></a>
+  <%})%>
+</ul> -->
+<div class="row">
+  <%job.jobsData.forEach((data) => {%>
+  <div class="col-sm-6">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-text"><%= data.name %></h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+          <%= data.currentPosition %>
+        </h6>
+        <p class="card-title">Email: <%= data.email %></p>
+        <p class="card-text">Mobile Number: <%= data.mobile %></p>
+        <a href="#" class="card-link">Edit Form</a>
+        <a href="#" class="card-link">Delete Form</a>
+      </div>
+    </div>
+  </div>
+
+  <%})%>
+</div>

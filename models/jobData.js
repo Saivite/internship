@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const JobSchema = new mongoose.Schema(
+const Schema = mongoose.Schema;
+const jobDataSchema = new Schema(
   {
     name: {
       type: String,
@@ -12,11 +13,6 @@ const JobSchema = new mongoose.Schema(
       //   required: [true, "Please provide location"],
       //   maxlenght: 200,
     },
-    status: {
-      type: String,
-      enum: ["interview", "declined", "pending"],
-      default: "pending",
-    },
     email: {
       type: String,
       //   required: [true, "Please Provide Email"],
@@ -24,6 +20,9 @@ const JobSchema = new mongoose.Schema(
       //   match: [
       //     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       //   ],
+    },
+    currentPosition: {
+      type: String,
     },
     mobile: {
       type: Number,
@@ -33,21 +32,10 @@ const JobSchema = new mongoose.Schema(
       type: String,
       //   required: [true, "Please Provide gender"],
     },
-    appliedIn: {
-      type: mongoose.Types.ObjectId,
-      ref: "allJob",
-    },
-    // createdBy: {
-    //   //tieing job model to the user one
-    //   type: mongoose.Types.ObjectId,
-    //   //tie job to the user
-    //   ref: "User",
-    //   required: [true, "Please provide user"],
-    // },
   },
   {
     timestamps: true,
   }
 );
 
-module.exports = mongoose.model("Job", JobSchema);
+module.exports = mongoose.model("JobData", jobDataSchema);
