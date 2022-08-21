@@ -21,6 +21,7 @@ const Employee = require("./models/employee");
 const adminRoutes = require("./routes/admin");
 const jobRoutes = require("./routes/jobs");
 const authRoutes = require("./routes/employee");
+const MongoDBStore = require("connect-mongo");
 
 const moment = require("moment"); // require
 moment().format();
@@ -34,13 +35,22 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
+//store session info in mongo instead of local default store
+const store = MongoDBStore.create({
+  // change this line
+  mongoUrl: process.env.MONGO_URI, // change this line
+  secret: "secret",
+  touchAfter: 24 * 60 * 60,
+});
+
 const sessionConfig = {
+  store,
   secret: "thisshouldbeabettersecret",
   resave: false,
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
-    expires: Date.now() * 1000 * 60 * 60 * 24 * 7,
+    expires: Date.now() * 1000 * 60 * 60 * 24 * 7, // in miliseconds
     maxAge: Date.now() * 1000 * 60 * 60 * 24 * 7,
   },
 };
