@@ -1,0 +1,37 @@
+<% layout('./layouts/boilerplate')%>
+<h1>Register Employees</h1>
+<form action="/admin/register" class="validated-form" method="POST" novalidate>
+  <div class="mb-3">
+    <label class="form-label" for="username">Employee Username</label>
+    <input
+      class="form-control"
+      type="text"
+      name="username"
+      id="username"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="email">Email</label>
+    <input class="form-control" type="email" name="email" id="email" required />
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="password">Password</label>
+    <input
+      class="form-control"
+      type="password"
+      name="password"
+      id="password"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="is_admin" class="form-label">Role</label>
+    <select id="is_admin" name="is_admin" class="form-select" required>
+      <option selected value="0">Employee</option>
+      <option value="1">Admin</option>
+    </select>
+  </div>
+  <button class="btn btn-success" type="submit">Register</button>
+</form>

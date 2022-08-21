@@ -32,7 +32,16 @@ const jobDataSchema = new Schema(
       type: String,
       //   required: [true, "Please Provide gender"],
     },
+    jobAuthor: {
+      type: Schema.Types.ObjectId,
+      ref: "Employee",
+    },
+    jobTitle: {
+      type: Schema.Types.ObjectId,
+      ref: "AllJob",
+    },
   },
+
   {
     timestamps: true,
   }

@@ -6,6 +6,7 @@ const ExpressError = require("../utils/ExpressError");
 const AllJob = require("../models/allJob");
 const JobData = require("../models/jobData");
 const { allJobSchema, jobDataSchema } = require("../schema");
+const isLoggedIn = require("../middleware/authenticated");
 
 const validateJobData = (req, res, next) => {
   const { error } = jobDataSchema.validate(req.body);
@@ -19,6 +20,7 @@ const validateJobData = (req, res, next) => {
 
 router.get(
   "/jobs",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     //   const newJob = new AllJob({
     //     title: "backend",
@@ -38,6 +40,7 @@ router.get(
 
 router.get(
   "/jobs/:id",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const job = await AllJob.findById(req.params.id).populate("jobsData");
     if (!job) {
@@ -50,6 +53,7 @@ router.get(
 
 router.get(
   "/jobs/:id/apply",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const job = await AllJob.findById(req.params.id);
     if (!job) {
@@ -62,6 +66,7 @@ router.get(
 
 router.post(
   "/jobs/:id/",
+  isLoggedIn,
   validateJobData,
   catchAsync(async (req, res) => {
     const { id } = req.params;

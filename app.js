@@ -14,9 +14,13 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const Employee = require("./models/employee");
 
 const adminRoutes = require("./routes/admin");
 const jobRoutes = require("./routes/jobs");
+const authRoutes = require("./routes/employee");
 
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
@@ -37,12 +41,27 @@ const sessionConfig = {
     maxAge: Date.now() * 1000 * 60 * 60 * 24 * 7,
   },
 };
+
+//it should be used before passport session
 app.use(session(sessionConfig));
 app.use(flash());
+
+//passport
+app.use(passport.initialize());
+//we need this to have persistent login sessions vs logging in with every request which is done with upi not as a user
+app.use(passport.session());
+//we're telling passport to use local strategy that we have required and for that local strategy auth method is going to be located in Employee model  and its called authenticate
+passport.use(new LocalStrategy(Employee.authenticate()));
+//tell passport to serialize user meaning storing user into a session
+passport.serializeUser(Employee.serializeUser());
+//how to get user out of session
+passport.deserializeUser(Employee.deserializeUser());
 
 //Middlewares - do it before route handler
 app.use((req, res, next) => {
   //it will give access to success in any of the template
+  console.log(req.session); //it contains returnTo value
+  res.locals.currentEmployee = req.user;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   next();
@@ -51,6 +70,7 @@ app.use((req, res, next) => {
 //router
 app.use("/admin", adminRoutes);
 app.use("/", jobRoutes);
+app.use("/", authRoutes);
 
 app.get("/", (req, res) => {
   res.render("home");

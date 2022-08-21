@@ -4,6 +4,7 @@ const catchAsync = require("../utils/catchAsync");
 const ExpressError = require("../utils/ExpressError");
 const AllJob = require("../models/allJob");
 const { allJobSchema, jobDataSchema } = require("../schema");
+const isLoggedIn = require("../middleware/authenticated");
 
 //******************* ADMIN PART ************** */
 
@@ -22,21 +23,20 @@ const validateAllJob = (req, res, next) => {
 
 router.get(
   "/AllJobs",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const jobs = await AllJob.find({});
     res.render("admin-jobs/admin_index", { jobs });
   })
 );
 
-router.get(
-  "/AllJobs/new",
-  catchAsync(async (req, res) => {
-    res.render("admin-jobs/admin_new");
-  })
-);
+router.get("/AllJobs/new", isLoggedIn, (req, res) => {
+  res.render("admin-jobs/admin_new");
+});
 
 router.post(
   "/AllJobs/",
+  isLoggedIn,
   validateAllJob,
   catchAsync(async (req, res) => {
     // if (!req.body.AllJob)
@@ -50,6 +50,7 @@ router.post(
 
 router.get(
   "/AllJobs/:id",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const job = await AllJob.findById(req.params.id).populate("jobsData");
     if (!job) {
@@ -62,6 +63,7 @@ router.get(
 
 router.get(
   "/AllJobs/:id/edit",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const job = await AllJob.findById(req.params.id);
     if (!job) {
@@ -74,6 +76,7 @@ router.get(
 
 router.put(
   "/AllJobs/:id",
+  isLoggedIn,
   validateAllJob,
   catchAsync(async (req, res) => {
     const { id } = req.params;
@@ -89,6 +92,7 @@ router.put(
 
 router.delete(
   "/AllJobs/:id",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const job = await AllJob.findByIdAndDelete(id);
@@ -101,14 +105,17 @@ router.delete(
   })
 );
 
-router.get("/AllJobs/:id/jobInfo", async (req, res) => {
-  const { id } = req.params;
-  const job = await AllJob.findById(id).populate("jobsData");
-  if (!job) {
-    req.flash("error", "Cant find the Job");
-    return res.redirect("/admin/AllJobs");
-  }
-  res.render("admin-jobs/admin_list", { job });
-});
-
+router.get(
+  "/AllJobs/:id/jobInfo",
+  isLoggedIn,
+  catchAsync(async (req, res) => {
+    const { id } = req.params;
+    const job = await AllJob.findById(id).populate("jobsData");
+    if (!job) {
+      req.flash("error", "Cant find the Job");
+      return res.redirect("/admin/AllJobs");
+    }
+    res.render("admin-jobs/admin_list", { job });
+  })
+);
 module.exports = router;
