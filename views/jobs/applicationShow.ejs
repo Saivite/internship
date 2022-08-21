@@ -1,0 +1,31 @@
+<% layout('./layouts/boilerplate')%>
+<h2>You have applied for <%= employee.jobApplied.length %> jobs</h2>
+<div class="row">
+  <%employee.jobApplied.forEach((data) => {%>
+
+  <div class="col-sm-6">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-text">
+          <i class="fa-solid fa-file-signature"></i> <%= data.position %>
+        </h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+          <i class="fa-solid fa-location-dot"> </i> <%= data.location %>
+        </h6>
+        <p class="card-title">
+          <i class="fa-solid fa-id-card"></i> <%= data.experience %>
+        </p>
+        <p class="card-title">
+          <i class="fa-solid fa-graduation-cap"></i> <%= data.skills %>
+        </p>
+        <p class="card-text">
+          <i class="fa-solid fa-book"></i> <%= data.eligibility %>
+        </p>
+        <!-- <a href="#" class="card-link">Edit Form</a>
+        <a href="#" class="card-link">Delete Form</a> -->
+      </div>
+    </div>
+  </div>
+
+  <%})%>
+</div>

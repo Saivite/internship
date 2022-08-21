@@ -32,14 +32,16 @@ const jobDataSchema = new Schema(
       type: String,
       //   required: [true, "Please Provide gender"],
     },
-    jobAuthor: {
+    applicant: {
       type: Schema.Types.ObjectId,
       ref: "Employee",
     },
-    jobTitle: {
-      type: Schema.Types.ObjectId,
-      ref: "AllJob",
-    },
+    jobApplied: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "AllJob",
+      },
+    ],
   },
 
   {

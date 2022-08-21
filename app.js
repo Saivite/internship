@@ -22,6 +22,9 @@ const adminRoutes = require("./routes/admin");
 const jobRoutes = require("./routes/jobs");
 const authRoutes = require("./routes/employee");
 
+const moment = require("moment"); // require
+moment().format();
+
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -60,21 +63,23 @@ passport.deserializeUser(Employee.deserializeUser());
 //Middlewares - do it before route handler
 app.use((req, res, next) => {
   //it will give access to success in any of the template
-  console.log(req.session); //it contains returnTo value
+  // console.log(req.session); //it contains returnTo value
   res.locals.currentEmployee = req.user;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
+  res.locals.moment = moment;
   next();
 });
 
 //router
-app.use("/admin", adminRoutes);
-app.use("/", jobRoutes);
-app.use("/", authRoutes);
 
 app.get("/", (req, res) => {
   res.render("home");
 });
+
+app.use("/admin", adminRoutes);
+app.use("/", jobRoutes);
+app.use("/", authRoutes);
 
 // app.get(
 //   "/jobs/:id/edit",

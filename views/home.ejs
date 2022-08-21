@@ -1,12 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-100">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta
+      name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
+    />
+    <meta name="generator" content="Hugo 0.88.1" />
+    <title>Tata Steel Employee Job Portal</title>
+
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/5.1/examples/cover/"
+    />
+
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+      integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/stylesheets/home.css" />
   </head>
-  <body>
-    <h1>Tata Steel</h1>
+  <body class="d-flex h-100 text-center text-white bg-dark">
+    <div class="container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="mb-auto">
+        <nav class="navbar bg-transparent">
+          <div class="container-fluid">
+
+            <nav class="navbar nav nav-masthead justify-content-center float-md-end">
+              <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Tata_Steel_Logo.svg" alt="" width="150" height="24" class="d-inline-block align-text-top">
+                </a>
+              </div>
+            </nav>
+
+          <nav class="nav nav-masthead justify-content-center float-md-end">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+            <a class="nav-link" href="/jobs">Jobs</a>
+            <% if(!currentEmployee) { %>
+            <a class="nav-link" href="/login">Login</a>
+            <% } else { %>
+            <a class="nav-link" href="/logout">Logout</a>
+            <% } %>
+            <a class="nav-link" href="/myApplications">My Applications</a>
+            
+          </nav>
+        </div>
+      </header>
+
+      <main class="px-3">
+        <h1>Acclerate Your Growth</h1>
+        <p class="lead">
+          At Tata Steel, we encourage and enable our employees to contribute their time and skills to make a difference to the lives of many. Employee volunteerism is actively promoted across our organisation.
+        </p>
+        <p class="lead">
+          <% if(currentEmployee && currentEmployee.is_admin === 1){ %>
+          <a
+            href="/admin/AllJobs"
+            class="btn btn-lg btn-secondary fw-bold border-white bg-white"
+            >Apply Now</a
+          >
+          <% } else { %>
+            <a
+            href="/jobs"
+            class="btn btn-lg btn-secondary fw-bold border-white bg-white"
+            >Apply Now</a
+          >
+          <% } %>
+        </p>
+      </main>
+
+      <footer class="mt-auto text-white-50">
+        <p>
+          Made
+          <a href="" class="text-white">with <3</a>,
+          by
+          <a href="https://github.com/saivite" class="text-white">saivite</a>.
+        </p>
+      </footer>
+    </div>
   </body>
 </html>

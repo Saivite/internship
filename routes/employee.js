@@ -4,15 +4,18 @@ const isLoggedIn = require("../middleware/authenticated");
 const router = express.Router();
 const Employee = require("../models/employee");
 const catchAsync = require("../utils/catchAsync");
+const isAdmin = require("../middleware/authorized");
 
 /*************** ADMIN ********** */
 
-router.get("/admin/register", (req, res) => {
+router.get("/admin/register", isLoggedIn, isAdmin, (req, res) => {
   res.render("employees/register");
 });
 
 router.post(
   "/admin/register",
+  isLoggedIn,
+  isAdmin,
   catchAsync(async (req, res) => {
     try {
       const { email, is_admin, username, password } = req.body;
@@ -21,9 +24,12 @@ router.post(
       //it allows to login a user after it has registered
       req.login(registeredEmployee, (err) => {
         if (err) return next(err);
-        req.flash("success", "Welcome to TATA STEEL");
+        req.flash(
+          "success",
+          `Welcome to TATA STEEL Employee Job Portal, ${req.user.username}`
+        );
         if (Number(is_admin) === 1) {
-          res.redirect("admin/AllJobs");
+          res.redirect("/admin/AllJobs");
         } else {
           res.redirect("/jobs");
         }
@@ -48,14 +54,14 @@ router.post(
     failureRedirect: "/login",
   }),
   (req, res) => {
-    req.flash("success", "Welcome back");
+    req.flash("success", `Welcome back ${req.user.username}`);
     const redirectUrl = req.session.returnTo || "/jobs";
     delete req.session.returnTo;
     res.redirect(redirectUrl);
   }
 );
 
-router.get("/logout", (req, res) => {
+router.get("/logout", isLoggedIn, (req, res) => {
   //provided by passport
   req.logout(async function (err) {
     if (err) {

@@ -13,10 +13,18 @@ const EmployeeSchema = new Schema(
       type: Number,
       default: 0,
     },
-    jobApplied: {
-      type: Schema.Types.ObjectId,
-      ref: "AllJob",
-    },
+    jobApplied: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "AllJob",
+      },
+    ],
+    jobsData: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "JobData",
+      },
+    ],
   },
   {
     timestamps: true,

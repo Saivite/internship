@@ -14,6 +14,10 @@ const AllJobSchema = new Schema(
     payment: String,
     experience: String,
     skills: String,
+    applicant: {
+      type: Schema.Types.ObjectId,
+      ref: "Employee",
+    },
     jobsData: [
       {
         type: Schema.Types.ObjectId,

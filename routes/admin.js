@@ -5,6 +5,7 @@ const ExpressError = require("../utils/ExpressError");
 const AllJob = require("../models/allJob");
 const { allJobSchema, jobDataSchema } = require("../schema");
 const isLoggedIn = require("../middleware/authenticated");
+const isAdmin = require("../middleware/authorized");
 
 //******************* ADMIN PART ************** */
 
@@ -24,19 +25,21 @@ const validateAllJob = (req, res, next) => {
 router.get(
   "/AllJobs",
   isLoggedIn,
+  isAdmin,
   catchAsync(async (req, res) => {
     const jobs = await AllJob.find({});
     res.render("admin-jobs/admin_index", { jobs });
   })
 );
 
-router.get("/AllJobs/new", isLoggedIn, (req, res) => {
+router.get("/AllJobs/new", isLoggedIn, isAdmin, (req, res) => {
   res.render("admin-jobs/admin_new");
 });
 
 router.post(
   "/AllJobs/",
   isLoggedIn,
+  isAdmin,
   validateAllJob,
   catchAsync(async (req, res) => {
     // if (!req.body.AllJob)
@@ -51,6 +54,7 @@ router.post(
 router.get(
   "/AllJobs/:id",
   isLoggedIn,
+  isAdmin,
   catchAsync(async (req, res) => {
     const job = await AllJob.findById(req.params.id).populate("jobsData");
     if (!job) {
@@ -64,6 +68,7 @@ router.get(
 router.get(
   "/AllJobs/:id/edit",
   isLoggedIn,
+  isAdmin,
   catchAsync(async (req, res) => {
     const job = await AllJob.findById(req.params.id);
     if (!job) {
@@ -77,6 +82,7 @@ router.get(
 router.put(
   "/AllJobs/:id",
   isLoggedIn,
+  isAdmin,
   validateAllJob,
   catchAsync(async (req, res) => {
     const { id } = req.params;
@@ -93,6 +99,7 @@ router.put(
 router.delete(
   "/AllJobs/:id",
   isLoggedIn,
+  isAdmin,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const job = await AllJob.findByIdAndDelete(id);
@@ -108,6 +115,7 @@ router.delete(
 router.get(
   "/AllJobs/:id/jobInfo",
   isLoggedIn,
+  isAdmin,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const job = await AllJob.findById(id).populate("jobsData");

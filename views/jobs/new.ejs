@@ -2,7 +2,7 @@
 
 <div class="row">
   <h1 class="text-center">Apply for <%=job.position %></h1>
-  <div class="col-6 offset-3">
+  <div class="col-md-6 offset-md-3">
     <form
       action="/jobs/<%= job._id %>"
       method="POST"
@@ -18,6 +18,7 @@
           id="email"
           required
         />
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="col-md-6">
         <label for="name" class="form-label">Name</label>
@@ -28,6 +29,7 @@
           id="name"
           required
         />
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="col-12">
         <label for="address" class="form-label">Address</label>
@@ -39,6 +41,7 @@
           name="jobData[address]"
           required
         />
+        <div class="valid-feedback">Looks good!</div>
       </div>
 
       <div class="col-md-6">
@@ -50,32 +53,29 @@
           name="jobData[currentPosition]"
           required
         />
-      </div>
-      <div class="col-md-4">
-        <label for="location" class="form-label">Preferred Location</label>
-        <select
-          id="location"
-          name="jobData[location]"
-          class="form-select"
-          required
-        >
-          <option selected>Choose...</option>
-          <option>Kolkata</option>
-          <option>Jamshedpur</option>
-          <option>Chennai</option>
-          <option>Bangalore</option>
-          <option>Hyderabad</option>
-          <option>Delhi</option>
-        </select>
+        <div class="valid-feedback">Looks good!</div>
       </div>
 
-      <div class="col-md-2">
+      <div class="col-md-6">
+        <label for="location" class="form-label">Preferred Location</label>
+        <input
+          type="text"
+          class="form-control"
+          id="location"
+          name="jobData[location]"
+          required
+        />
+        <div class="valid-feedback">Looks good!</div>
+      </div>
+
+      <div class="col-md-3">
         <label for="gender" class="form-label">Gender</label>
         <select id="gender" name="jobData[gender]" class="form-select" required>
-          <option selected>Choose...</option>
-          <option>Male</option>
-          <option>Female</option>
+          <option value="">Choose...</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
         </select>
+        <div class="valid-feedback">Looks good!</div>
       </div>
 
       <div class="col-md-4">
@@ -87,6 +87,7 @@
           name="jobData[mobile]"
           required
         />
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="col-12">
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -94,33 +95,3 @@
     </form>
   </div>
 </div>
-
-<!-- <form >
-
-      <div>
-        <label for="location">Location</label>
-        <input type="text" name="job[location]" id="location" />
-      </div>
-      <div>
-        <label for="dob">Date Of Birth</label>
-        <input type="date" name="job[dob]" id="dob" />
-      </div>
-      <div>
-        <label for="gender">Gender:</label>
-
-        <select name="job[gender]" id="gender">
-          <optgroup label="Gender"></optgroup>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-      </div>
-
-      <div>
-        <label for="mobile">Mobile Number</label>
-        <input type="text" name="job[mobile]" id="mobile" />
-      </div>
-
-      <button>Submit</button>
-    </form>
-  </div>
-</div> -->

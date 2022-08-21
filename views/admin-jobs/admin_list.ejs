@@ -13,14 +13,20 @@
   <div class="col-sm-6">
     <div class="card mb-3">
       <div class="card-body">
-        <h5 class="card-text"><%= data.name %></h5>
+        <h5 class="card-text">
+          <i class="fa-solid fa-user"></i> <%= data.name %>
+        </h5>
         <h6 class="card-subtitle mb-2 text-muted">
+          <i class="fa-solid fa-address-card"></i>
           <%= data.currentPosition %>
         </h6>
-        <p class="card-title">Email: <%= data.email %></p>
-        <p class="card-text">Mobile Number: <%= data.mobile %></p>
-        <a href="#" class="card-link">Edit Form</a>
-        <a href="#" class="card-link">Delete Form</a>
+        <p class="card-title">
+          <i class="fa-regular fa-envelope"></i> Email: <%= data.email %>
+        </p>
+        <p class="card-text">
+          <i class="fa-solid fa-mobile-screen-button"></i> Mobile Number: <%=
+          data.mobile %>
+        </p>
       </div>
     </div>
   </div>

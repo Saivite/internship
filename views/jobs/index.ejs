@@ -1,21 +1,19 @@
 <% layout('./layouts/boilerplate')%>
-<div class="col-10 offset-1">
-  <h1>All Jobs</h1>
   <% for(let job of jobs){ %>
-
-  <div class="card mb-4">
-    <div class="col-md-8">
+  <div class="card col-md-6 offset-md-3">
+    <div class="col-mb-3">
       <div class="card-body">
-        <h5 class="card-title"><%= job.title %></h5>
+        <h4 class="card-title"><i class="fa-solid fa-file-signature"></i>   <%= job.position %></h4>
         <p class="card-text"><%= job.description %></p>
-        <p class="card-text"><%= job.skills %></p>
-        <p class="card-text">
-          <small class="text-muted"><%= job.location%></small>
+        <p class="card-text"><i class="fa-solid fa-graduation-cap"></i>  <%= job.skills %></p>
+        <p class="card-text"> <i class="fa-solid fa-location-dot"> </i>
+          <small class="text-muted">    <%= job.location%></small>
         </p>
         <p class="card-text">
+          <i class="fa-solid fa-book"></i>
           <small class="text-muted"><%= job.eligibility%></small>
         </p>
-        <p class="card-text">
+        <p class="card-text"><i class="fa-solid fa-id-card"></i>
           <small class="text-muted"><%= job.experience%></small>
         </p>
         <a href="/jobs/<%=job._id%>" class="btn btn-primary">More Info</a>
