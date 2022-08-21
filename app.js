@@ -39,13 +39,13 @@ app.use(express.static(path.join(__dirname, "public")));
 const store = MongoDBStore.create({
   // change this line
   mongoUrl: process.env.MONGO_URI, // change this line
-  secret: "secret",
+  secret: process.env.SECRET,
   touchAfter: 24 * 60 * 60,
 });
 
 const sessionConfig = {
   store,
-  secret: "thisshouldbeabettersecret",
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
