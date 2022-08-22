@@ -16,7 +16,7 @@
         <i class="fa-solid fa-graduation-cap"></i>
         Skills Required: <% const ar1 = job.skills.split(',') %>
         <%ar1.forEach((skill) => { %>
-        <a class="btn btn-info" href="#"><%= skill %></a>
+        <button class="btn btn-info mb-2" href="#"><%= skill %></button>
         <% }) %>
       </li>
 
@@ -24,7 +24,7 @@
         <i class="fa-solid fa-book"></i>
         Eligibility: <% const ar2 = job.eligibility.split(',') %>
         <%ar2.forEach((eligible) => { %>
-        <a class="btn btn-info" href="#"><%= eligible %></a>
+        <a class="btn btn-info mb-2" href="#"><%= eligible %></a>
         <% }) %>
       </li>
 
@@ -37,10 +37,10 @@
       </li>
     </ul>
     <div class="card-body">
-      <a class="card-link btn btn-primary" href="/jobs/<%=job._id %>/apply%>"
+      <a class="card-link btn btn-warning" href="/jobs/<%=job._id %>/apply%>"
         >Apply</a
       >
-      <a href="/jobs" class="card-link btn btn-info">All Jobs</a>
+      <a href="/jobs" class="card-link btn btn-secondary">All Jobs</a>
     </div>
     <div class="card-footer text-muted">
       <%=job.jobsData.length %> Employees has Applied for this Post
@@ -52,9 +52,11 @@
   <div class="card mb-3">
     <div class="card-body">
       <h5 class="card-title">
+        <i class="fa-solid fa-calendar-check"></i>
         Opening Date: <%= moment(job.openingDate).format('Do MMMM, YYYY') %>
       </h5>
       <h5 class="card-subtitle mb-2">
+        <i class="fa-solid fa-calendar-xmark"></i>
         Closing Date: <%= moment(job.closingDate).format('Do MMMM, YYYY') %>
       </h5>
       <p class="card-text">

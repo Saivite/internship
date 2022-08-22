@@ -55,7 +55,12 @@ router.post(
   }),
   (req, res) => {
     req.flash("success", `Welcome back ${req.user.username}`);
-    const redirectUrl = req.session.returnTo || "/jobs";
+    let redirectUrl;
+    if (Number(req.user.is_admin) === 1) {
+      redirectUrl = req.session.returnTo || "/admin/AllJobs";
+    } else {
+      redirectUrl = req.session.returnTo || "/jobs";
+    }
     delete req.session.returnTo;
     res.redirect(redirectUrl);
   }
