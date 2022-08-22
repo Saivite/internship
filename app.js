@@ -21,7 +21,7 @@ const Employee = require("./models/employee");
 const adminRoutes = require("./routes/admin");
 const jobRoutes = require("./routes/jobs");
 const authRoutes = require("./routes/employee");
-const MongoDBStore = require("connect-mongo");
+const MongoDBStore = require("connect-mongo")(session);
 
 const moment = require("moment"); // require
 moment().format();
@@ -35,26 +35,31 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
-//store session info in mongo instead of local default store
-const store = MongoDBStore.create({
-  // change this line
-  mongoUrl: process.env.MONGO_URI, // change this line
-  secret: process.env.SECRET,
+const secret = process.env.SECRET || "thisshouldbeabettersecret!";
+
+const store = new MongoDBStore({
+  url: process.env.MONGO_URI,
+  secret,
   touchAfter: 24 * 60 * 60,
+});
+
+store.on("error", function (e) {
+  console.log("SESSION STORE ERROR", e);
 });
 
 const sessionConfig = {
   store,
-  secret: process.env.SECRET,
+  name: "session",
+  secret,
   resave: false,
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
-    expires: Date.now() * 1000 * 60 * 60 * 24 * 7, // in miliseconds
-    maxAge: Date.now() * 1000 * 60 * 60 * 24 * 7,
+    // secure: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    maxAge: 1000 * 60 * 60 * 24 * 7,
   },
 };
-
 //it should be used before passport session
 app.use(session(sessionConfig));
 app.use(flash());
